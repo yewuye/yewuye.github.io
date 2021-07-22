@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本篇是这 208 道题中，第一部分“Java 基础”模块的题和答案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java面试准备1">
+<meta property="og:url" content="http://example.com/2021/07/22/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%871/index.html">
+<meta property="og:site_name" content="七秒记忆">
+<meta property="og:description" content="本篇是这 208 道题中，第一部分“Java 基础”模块的题和答案。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/07/22/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%871/1.png">
+<meta property="article:published_time" content="2021-07-22T10:16:00.000Z">
+<meta property="article:modified_time" content="2021-07-22T11:03:24.626Z">
+<meta property="article:author" content="默屿">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/07/22/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%871/1.png">
+
+<link rel="canonical" href="http://example.com/2021/07/22/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%871/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>java面试准备1 | 七秒记忆</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">七秒记忆</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-read">
+
+    <a href="/categories/%E8%AF%BB%E4%B9%A6" rel="section"><i class="fa fa-book fa-fw"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/22/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%871/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/miyan.jpg">
+      <meta itemprop="name" content="默屿">
+      <meta itemprop="description" content="不积跬步无以至千里">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="七秒记忆">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java面试准备1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-07-22 18:16:00 / 修改时间：19:03:24" itemprop="dateCreated datePublished" datetime="2021-07-22T18:16:00+08:00">2021-07-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本篇是这 208 道题中，第一部分“Java 基础”模块的题和答案。</p>
+<span id="more"></span>
+
+<h3 id="Java-基础"><a href="#Java-基础" class="headerlink" title="Java 基础"></a>Java 基础</h3><h4 id="JDK-和-JRE-有什么区别？"><a href="#JDK-和-JRE-有什么区别？" class="headerlink" title="JDK 和 JRE 有什么区别？"></a>JDK 和 JRE 有什么区别？</h4><ul>
+<li>JDK：Java Development Kit 的简称，java 开发工具包，提供了 java 的开发环境和运行环境。</li>
+<li>JRE：Java Runtime Environment 的简称，java 运行环境，为 java 的运行提供了所需环境。</li>
+</ul>
+<p>具体来说 JDK 其实包含了 JRE，同时还包含了编译 java 源码的编译器 javac，还包含了很多 java 程序调试和分析的工具。简单来说：如果你需要运行 java 程序，只需安装 JRE 就可以了，如果你需要编写 java 程序，需要安装 JDK。</p>
+<h4 id="和-equals-的区别是什么？"><a href="#和-equals-的区别是什么？" class="headerlink" title="== 和 equals 的区别是什么？"></a>== 和 equals 的区别是什么？</h4><p><strong>== 解读</strong></p>
+<p>对于基本类型和引用类型 == 的作用效果是不同的，如下所示：</p>
+<ul>
+<li>基本类型：比较的是值是否相同；</li>
+<li>引用类型：比较的是引用是否相同；</li>
+</ul>
+<p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String x = <span class="string">&quot;string&quot;</span>;</span><br><span class="line">String y = <span class="string">&quot;string&quot;</span>;</span><br><span class="line">String z = <span class="keyword">new</span> String(<span class="string">&quot;string&quot;</span>);</span><br><span class="line">System.out.println(x==y); <span class="comment">// true</span></span><br><span class="line">System.out.println(x==z); <span class="comment">// false</span></span><br><span class="line">System.out.println(x.equals(y)); <span class="comment">// true</span></span><br><span class="line">System.out.println(x.equals(z)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>代码解读：因为 x 和 y 指向的是同一个引用，所以 == 也是 true，而 new String()方法则重写开辟了内存空间，所以 == 结果为 false，而 equals 比较的一直是值，所以结果都为 true。</p>
+<p><strong>equals 解读</strong></p>
+<p>equals 本质上就是 ==，只不过 String 和 Integer 等重写了 equals 方法，把它变成了值比较。看下面的代码就明白了。</p>
+<p>首先来看默认情况下 equals 比较一个有相同值的对象，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Cat</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Cat c1 = <span class="keyword">new</span> Cat(<span class="string">&quot;王磊&quot;</span>);</span><br><span class="line">Cat c2 = <span class="keyword">new</span> Cat(<span class="string">&quot;王磊&quot;</span>);</span><br><span class="line">System.out.println(c1.equals(c2)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>输出结果出乎我们的意料，竟然是 false？这是怎么回事，看了 equals 源码就知道了，源码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>原来 equals 本质上就是 ==。</p>
+<p>那问题来了，两个相同值的 String 对象，为什么返回的是 true？代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == anObject) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">        String anotherString = (String)anObject;</span><br><span class="line">        <span class="keyword">int</span> n = value.length;</span><br><span class="line">        <span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line">            <span class="keyword">char</span> v1[] = value;</span><br><span class="line">            <span class="keyword">char</span> v2[] = anotherString.value;</span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>原来是 String 重写了 Object 的 equals 方法，把引用比较改成了值比较。</p>
+<p>总结 ：== 对于基本类型来说是值比较，对于引用类型来说是比较的是引用；而 equals 默认情况下是引用比较，只是很多类重新了 equals 方法，比如 String、Integer 等把它变成了值比较，所以一般情况下 equals 比较的是值是否相等。</p>
+<h4 id="两个对象的-hashCode-相同，则-equals-也一定为-true，对吗？"><a href="#两个对象的-hashCode-相同，则-equals-也一定为-true，对吗？" class="headerlink" title="两个对象的 hashCode()相同，则 equals()也一定为 true，对吗？"></a>两个对象的 hashCode()相同，则 equals()也一定为 true，对吗？</h4><p>不对，两个对象的 hashCode()相同，equals()不一定 true。</p>
+<p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String str1 = <span class="string">&quot;通话&quot;</span>;</span><br><span class="line">String str2 = <span class="string">&quot;重地&quot;</span>;</span><br><span class="line">System.out.println(String.format(<span class="string">&quot;str1：%d | str2：%d&quot;</span>,  str1.hashCode(),str2.hashCode()));</span><br><span class="line">System.out.println(str1.equals(str2));</span><br></pre></td></tr></table></figure>
+<p>执行的结果：<br>str1：1179395 | str2：1179395<br>false</p>
+<p>代码解读：很显然“通话”和“重地”的 hashCode() 相同，然而 equals() 则为 false，因为在散列表中，hashCode()相等即两个键值对的哈希值相等，然而哈希值相等，并不一定能得出键值对相等。</p>
+<h4 id="final-在-java-中有什么作用？"><a href="#final-在-java-中有什么作用？" class="headerlink" title="final 在 java 中有什么作用？"></a>final 在 java 中有什么作用？</h4><ul>
+<li>final 修饰的类叫最终类，该类不能被继承。</li>
+<li>final 修饰的方法不能被重写。</li>
+<li>final 修饰的变量叫常量，常量必须初始化，初始化之后值就不能被修改</li>
+</ul>
+<h4 id="java-中的-Math-round-1-5-等于多少？"><a href="#java-中的-Math-round-1-5-等于多少？" class="headerlink" title="java 中的 Math.round(-1.5) 等于多少？"></a>java 中的 Math.round(-1.5) 等于多少？</h4><p>等于 -1，因为在数轴上取值时，中间值（0.5）向右取整，所以正 0.5 是往上取整，负 0.5 是直接舍弃。</p>
+<h4 id="String-属于基础的数据类型吗？"><a href="#String-属于基础的数据类型吗？" class="headerlink" title="String 属于基础的数据类型吗？"></a>String 属于基础的数据类型吗？</h4><p>String 不属于基础类型，基础类型有 8 种：byte、boolean、char、short、int、float、long、double，而 String 属于对象。</p>
+<h4 id="java-中操作字符串都有哪些类？它们之间有什么区别？"><a href="#java-中操作字符串都有哪些类？它们之间有什么区别？" class="headerlink" title="java 中操作字符串都有哪些类？它们之间有什么区别？"></a>java 中操作字符串都有哪些类？它们之间有什么区别？</h4><p>操作字符串的类有：String、StringBuffer、StringBuilder。</p>
+<p>String 和 StringBuffer、StringBuilder 的区别在于 String 声明的是不可变的对象，每次操作都会生成新的 String 对象，然后将指针指向新的 String 对象，而 StringBuffer、StringBuilder 可以在原有对象的基础上进行操作，所以在经常改变字符串内容的情况下最好不要使用 String。</p>
+<p>StringBuffer 和 StringBuilder 最大的区别在于，StringBuffer 是线程安全的，而 StringBuilder 是非线程安全的，但 StringBuilder 的性能却高于 StringBuffer，所以在单线程环境下推荐使用 StringBuilder，多线程环境下推荐使用 StringBuffer。</p>
+<h4 id="String-str-”i”与-String-str-new-String-“i”-一样吗？"><a href="#String-str-”i”与-String-str-new-String-“i”-一样吗？" class="headerlink" title="String str=”i”与 String str=new String(“i”)一样吗？"></a>String str=”i”与 String str=new String(“i”)一样吗？</h4><p>不一样，因为内存的分配方式不一样。String str=”i”的方式，java 虚拟机会将其分配到常量池中；而 String str=new String(“i”) 则会被分到堆内存中。</p>
+<h4 id="如何将字符串反转？"><a href="#如何将字符串反转？" class="headerlink" title="如何将字符串反转？"></a>如何将字符串反转？</h4><p>使用 StringBuilder 或者 stringBuffer 的 reverse() 方法。</p>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// StringBuffer reverse</span></span><br><span class="line">StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">stringBuffer.append(<span class="string">&quot;abcdefg&quot;</span>);</span><br><span class="line">System.out.println(stringBuffer.reverse()); <span class="comment">// gfedcba</span></span><br><span class="line"><span class="comment">// StringBuilder reverse</span></span><br><span class="line">StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">stringBuilder.append(<span class="string">&quot;abcdefg&quot;</span>);</span><br><span class="line">System.out.println(stringBuilder.reverse()); <span class="comment">// gfedcba</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="String-类的常用方法都有那些？"><a href="#String-类的常用方法都有那些？" class="headerlink" title="String 类的常用方法都有那些？"></a>String 类的常用方法都有那些？</h4><ul>
+<li>indexOf()：返回指定字符的索引。</li>
+<li>charAt()：返回指定索引处的字符。</li>
+<li>replace()：字符串替换。</li>
+<li>trim()：去除字符串两端空白。</li>
+<li>split()：分割字符串，返回一个分割后的字符串数组。</li>
+<li>getBytes()：返回字符串的 byte 类型数组。</li>
+<li>length()：返回字符串长度。</li>
+<li>toLowerCase()：将字符串转成小写字母。</li>
+<li>toUpperCase()：将字符串转成大写字符。</li>
+<li>substring()：截取字符串。</li>
+<li>equals()：字符串比较。</li>
+</ul>
+<h4 id="抽象类必须要有抽象方法吗？"><a href="#抽象类必须要有抽象方法吗？" class="headerlink" title="抽象类必须要有抽象方法吗？"></a>抽象类必须要有抽象方法吗？</h4><p>不需要，抽象类不一定非要有抽象方法。</p>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Cat</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sayHi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;hi~&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码，抽象类并没有抽象方法但完全可以正常运行。</p>
+<h4 id="普通类和抽象类有哪些区别？"><a href="#普通类和抽象类有哪些区别？" class="headerlink" title="普通类和抽象类有哪些区别？"></a>普通类和抽象类有哪些区别？</h4><ul>
+<li>普通类不能包含抽象方法，抽象类可以包含抽象方法。</li>
+<li>抽象类不能直接实例化，普通类可以直接实例化。</li>
+</ul>
+<h4 id="抽象类能使用-final-修饰吗？"><a href="#抽象类能使用-final-修饰吗？" class="headerlink" title="抽象类能使用 final 修饰吗？"></a>抽象类能使用 final 修饰吗？</h4><p>不能，定义抽象类就是让其他类继承的，如果定义为 final 该类就不能被继承，这样彼此就会产生矛盾，所以 final 不能修饰抽象类，如下图所示，编辑器也会提示错误信息：<br><img src="/2021/07/22/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%871/1.png"></p>
+<h4 id="接口和抽象类有什么区别？"><a href="#接口和抽象类有什么区别？" class="headerlink" title="接口和抽象类有什么区别？"></a>接口和抽象类有什么区别？</h4><ul>
+<li>实现：抽象类的子类使用 extends 来继承；接口必须使用 implements 来实现接口。</li>
+<li>构造函数：抽象类可以有构造函数；接口不能有。</li>
+<li>main 方法：抽象类可以有 main 方法，并且我们能运行它；接口不能有 main 方法。</li>
+<li>实现数量：类可以实现很多个接口；但是只能继承一个抽象类。</li>
+<li>访问修饰符：接口中的方法默认使用 public 修饰；抽象类中的方法可以是任意访问修饰符。</li>
+</ul>
+<h4 id="java-中-IO-流分为几种？"><a href="#java-中-IO-流分为几种？" class="headerlink" title="java 中 IO 流分为几种？"></a>java 中 IO 流分为几种？</h4><p>按功能来分：输入流（input）、输出流（output）。</p>
+<p>按类型来分：字节流和字符流。</p>
+<p>字节流和字符流的区别是：字节流按 8 位传输以字节为单位输入输出数据，字符流按 16 位传输以字符为单位输入输出数据。</p>
+<h4 id="BIO、NIO、AIO-有什么区别？"><a href="#BIO、NIO、AIO-有什么区别？" class="headerlink" title="BIO、NIO、AIO 有什么区别？"></a>BIO、NIO、AIO 有什么区别？</h4><ul>
+<li>BIO：Block IO 同步阻塞式 IO，就是我们平常使用的传统 IO，它的特点是模式简单使用方便，并发处理能力低。</li>
+<li>NIO：New IO 同步非阻塞 IO，是传统 IO 的升级，客户端和服务器端通过 Channel（通道）通讯，实现了多路复用。</li>
+<li>AIO：Asynchronous IO 是 NIO 的升级，也叫 NIO2，实现了异步非堵塞 IO ，异步 IO 的操作基于事件和回调机制。</li>
+</ul>
+<h4 id="Files的常用方法都有哪些？"><a href="#Files的常用方法都有哪些？" class="headerlink" title="Files的常用方法都有哪些？"></a>Files的常用方法都有哪些？</h4><ul>
+<li>Files.exists()：检测文件路径是否存在。</li>
+<li>Files.createFile()：创建文件。</li>
+<li>Files.createDirectory()：创建文件夹。</li>
+<li>Files.delete()：删除一个文件或目录。</li>
+<li>Files.copy()：复制文件。</li>
+<li>Files.move()：移动文件。</li>
+<li>Files.size()：查看文件个数。</li>
+<li>Files.read()：读取文件。</li>
+<li>Files.write()：写入文件。</li>
+</ul>
+<h5 align = "center">（完）</h5>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/19/2021%E5%B9%B4%E9%9C%80%E8%A6%81%E5%85%B3%E6%B3%A8%E7%9A%8410%E4%B8%AAIT%E8%B6%8B%E5%8A%BF/" rel="prev" title="2021年需要关注的10个IT趋势">
+      <i class="fa fa-chevron-left"></i> 2021年需要关注的10个IT趋势
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">Java 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JDK-%E5%92%8C-JRE-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">JDK 和 JRE 有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%92%8C-equals-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">&#x3D;&#x3D; 和 equals 的区别是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E7%9A%84-hashCode-%E7%9B%B8%E5%90%8C%EF%BC%8C%E5%88%99-equals-%E4%B9%9F%E4%B8%80%E5%AE%9A%E4%B8%BA-true%EF%BC%8C%E5%AF%B9%E5%90%97%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">两个对象的 hashCode()相同，则 equals()也一定为 true，对吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#final-%E5%9C%A8-java-%E4%B8%AD%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">final 在 java 中有什么作用？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java-%E4%B8%AD%E7%9A%84-Math-round-1-5-%E7%AD%89%E4%BA%8E%E5%A4%9A%E5%B0%91%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">java 中的 Math.round(-1.5) 等于多少？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String-%E5%B1%9E%E4%BA%8E%E5%9F%BA%E7%A1%80%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%90%97%EF%BC%9F"><span class="nav-number">1.6.</span> <span class="nav-text">String 属于基础的数据类型吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java-%E4%B8%AD%E6%93%8D%E4%BD%9C%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E7%B1%BB%EF%BC%9F%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.7.</span> <span class="nav-text">java 中操作字符串都有哪些类？它们之间有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String-str-%E2%80%9Di%E2%80%9D%E4%B8%8E-String-str-new-String-%E2%80%9Ci%E2%80%9D-%E4%B8%80%E6%A0%B7%E5%90%97%EF%BC%9F"><span class="nav-number">1.8.</span> <span class="nav-text">String str&#x3D;”i”与 String str&#x3D;new String(“i”)一样吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%8D%E8%BD%AC%EF%BC%9F"><span class="nav-number">1.9.</span> <span class="nav-text">如何将字符串反转？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String-%E7%B1%BB%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E9%83%BD%E6%9C%89%E9%82%A3%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.10.</span> <span class="nav-text">String 类的常用方法都有那些？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%BF%85%E9%A1%BB%E8%A6%81%E6%9C%89%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95%E5%90%97%EF%BC%9F"><span class="nav-number">1.11.</span> <span class="nav-text">抽象类必须要有抽象方法吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E7%B1%BB%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.12.</span> <span class="nav-text">普通类和抽象类有哪些区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E8%83%BD%E4%BD%BF%E7%94%A8-final-%E4%BF%AE%E9%A5%B0%E5%90%97%EF%BC%9F"><span class="nav-number">1.13.</span> <span class="nav-text">抽象类能使用 final 修饰吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.14.</span> <span class="nav-text">接口和抽象类有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java-%E4%B8%AD-IO-%E6%B5%81%E5%88%86%E4%B8%BA%E5%87%A0%E7%A7%8D%EF%BC%9F"><span class="nav-number">1.15.</span> <span class="nav-text">java 中 IO 流分为几种？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BIO%E3%80%81NIO%E3%80%81AIO-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.16.</span> <span class="nav-text">BIO、NIO、AIO 有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Files%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.17.</span> <span class="nav-text">Files的常用方法都有哪些？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.17.1.</span> <span class="nav-text">（完）</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="默屿"
+      src="/uploads/miyan.jpg">
+  <p class="site-author-name" itemprop="name">默屿</p>
+  <div class="site-description" itemprop="description">不积跬步无以至千里</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">默屿</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
