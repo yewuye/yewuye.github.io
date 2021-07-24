@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本篇是这 208 道题中，第七部分“Java 网络”模块的题和答案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java面试准备7">
+<meta property="og:url" content="http://example.com/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%877/index.html">
+<meta property="og:site_name" content="七秒记忆">
+<meta property="og:description" content="本篇是这 208 道题中，第七部分“Java 网络”模块的题和答案。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%876/1.png">
+<meta property="article:published_time" content="2021-07-24T08:57:00.000Z">
+<meta property="article:modified_time" content="2021-07-24T13:16:39.840Z">
+<meta property="article:author" content="默屿">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%876/1.png">
+
+<link rel="canonical" href="http://example.com/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%877/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>java面试准备7 | 七秒记忆</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">七秒记忆</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-read">
+
+    <a href="/categories/%E8%AF%BB%E4%B9%A6" rel="section"><i class="fa fa-book fa-fw"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%877/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/miyan.jpg">
+      <meta itemprop="name" content="默屿">
+      <meta itemprop="description" content="不积跬步无以至千里">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="七秒记忆">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java面试准备7
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-07-24 16:57:00 / 修改时间：21:16:39" itemprop="dateCreated datePublished" datetime="2021-07-24T16:57:00+08:00">2021-07-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本篇是这 208 道题中，第七部分“Java 网络”模块的题和答案。</p>
+<span id="more"></span>
+
+<h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><p><img src="/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%876/1.png"></p>
+<h4 id="http-响应码-301-和-302-代表的是什么？有什么区别？"><a href="#http-响应码-301-和-302-代表的是什么？有什么区别？" class="headerlink" title="http 响应码 301 和 302 代表的是什么？有什么区别？"></a>http 响应码 301 和 302 代表的是什么？有什么区别？</h4><p>答：301，302 都是HTTP状态的编码，都代表着某个URL发生了转移。</p>
+<p>区别： </p>
+<ul>
+<li>301 redirect: 301 代表永久性转移(Permanently Moved)。</li>
+<li>302 redirect: 302 代表暂时性转移(Temporarily Moved )。</li>
+</ul>
+<h4 id="forward-和-redirect-的区别？"><a href="#forward-和-redirect-的区别？" class="headerlink" title="forward 和 redirect 的区别？"></a>forward 和 redirect 的区别？</h4><p>Forward和Redirect代表了两种请求转发方式：直接转发和间接转发。</p>
+<p><strong>直接转发方式（Forward）</strong>，客户端和浏览器只发出一次请求，Servlet、HTML、JSP或其它信息资源，由第二个信息资源响应该请求，在请求对象request中，保存的对象对于每个信息资源是共享的。</p>
+<p><strong>间接转发方式（Redirect）</strong>实际是两次HTTP请求，服务器端在响应第一次请求的时候，让浏览器再向另外一个URL发出请求，从而达到转发的目的。</p>
+<p><strong>举个通俗的例子：</strong><br>直接转发就相当于：“A找B借钱，B说没有，B去找C借，借到借不到都会把消息传递给A”；</p>
+<p>间接转发就相当于：”A找B借钱，B说没有，让A去找C借”。</p>
+<h4 id="简述-tcp-和-udp的区别？"><a href="#简述-tcp-和-udp的区别？" class="headerlink" title="简述 tcp 和 udp的区别？"></a>简述 tcp 和 udp的区别？</h4><ul>
+<li>TCP面向连接（如打电话要先拨号建立连接）;UDP是无连接的，即发送数据之前不需要建立连接。</li>
+<li>TCP提供可靠的服务。也就是说，通过TCP连接传送的数据，无差错，不丢失，不重复，且按序到达;UDP尽最大努力交付，即不保证可靠交付。</li>
+<li>Tcp通过校验和，重传控制，序号标识，滑动窗口、确认应答实现可靠传输。如丢包时的重发控制，还可以对次序乱掉的分包进行顺序控制。</li>
+<li>UDP具有较好的实时性，工作效率比TCP高，适用于对高速传输和实时性有较高的通信或广播通信。</li>
+<li>每一条TCP连接只能是点到点的;UDP支持一对一，一对多，多对一和多对多的交互通信。</li>
+<li>TCP对系统资源要求较多，UDP对系统资源要求较少。</li>
+</ul>
+<h4 id="tcp-为什么要三次握手，两次不行吗？为什么？"><a href="#tcp-为什么要三次握手，两次不行吗？为什么？" class="headerlink" title="tcp 为什么要三次握手，两次不行吗？为什么？"></a>tcp 为什么要三次握手，两次不行吗？为什么？</h4><p>为了实现可靠数据传输， TCP 协议的通信双方， 都必须维护一个序列号， 以标识发送出去的数据包中， 哪些是已经被对方收到的。 三次握手的过程即是通信双方相互告知序列号起始值， 并确认对方已经收到了序列号起始值的必经步骤。</p>
+<p>如果只是两次握手， 至多只有连接发起方的起始序列号能被确认， 另一方选择的序列号则得不到确认。</p>
+<h4 id="OSI-的七层模型都有哪些？"><a href="#OSI-的七层模型都有哪些？" class="headerlink" title="OSI 的七层模型都有哪些？"></a>OSI 的七层模型都有哪些？</h4><ol>
+<li>应用层：网络服务与最终用户的一个接口。</li>
+<li>表示层：数据的表示、安全、压缩。</li>
+<li>会话层：建立、管理、终止会话。</li>
+<li>传输层：定义传输数据的协议端口号，以及流控和差错校验。</li>
+<li>网络层：进行逻辑地址寻址，实现不同网络之间的路径选择。</li>
+<li>数据链路层：建立逻辑连接、进行硬件地址寻址、差错校验等功能。</li>
+<li>物理层：建立、维护、断开物理连接。</li>
+</ol>
+<h4 id="get-和-post-请求有哪些区别？"><a href="#get-和-post-请求有哪些区别？" class="headerlink" title="get 和 post 请求有哪些区别？"></a>get 和 post 请求有哪些区别？</h4><ul>
+<li>GET在浏览器回退时是无害的，而POST会再次提交请求。</li>
+<li>GET产生的URL地址可以被Bookmark，而POST不可以。</li>
+<li>GET请求会被浏览器主动cache，而POST不会，除非手动设置。</li>
+<li>GET请求只能进行url编码，而POST支持多种编码方式。</li>
+<li>GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。</li>
+<li>GET请求在URL中传送的参数是有长度限制的，而POST么有。</li>
+<li>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。</li>
+<li>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。</li>
+<li>GET参数通过URL传递，POST放在Request body中。</li>
+</ul>
+<h5 align = "center">（完）</h5>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%876/" rel="prev" title="java面试准备6">
+      <i class="fa fa-chevron-left"></i> java面试准备6
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%878/" rel="next" title="java面试准备8">
+      java面试准备8 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C"><span class="nav-number">1.</span> <span class="nav-text">网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http-%E5%93%8D%E5%BA%94%E7%A0%81-301-%E5%92%8C-302-%E4%BB%A3%E8%A1%A8%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">http 响应码 301 和 302 代表的是什么？有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#forward-%E5%92%8C-redirect-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">forward 和 redirect 的区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0-tcp-%E5%92%8C-udp%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">简述 tcp 和 udp的区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%8C%E4%B8%A4%E6%AC%A1%E4%B8%8D%E8%A1%8C%E5%90%97%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">tcp 为什么要三次握手，两次不行吗？为什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OSI-%E7%9A%84%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">OSI 的七层模型都有哪些？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-%E5%92%8C-post-%E8%AF%B7%E6%B1%82%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.6.</span> <span class="nav-text">get 和 post 请求有哪些区别？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.6.1.</span> <span class="nav-text">（完）</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="默屿"
+      src="/uploads/miyan.jpg">
+  <p class="site-author-name" itemprop="name">默屿</p>
+  <div class="site-description" itemprop="description">不积跬步无以至千里</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">默屿</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

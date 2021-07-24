@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本篇是这 208 道题中，第二部分“Java 容器”模块的题和答案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java面试准备2">
+<meta property="og:url" content="http://example.com/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%872/index.html">
+<meta property="og:site_name" content="七秒记忆">
+<meta property="og:description" content="本篇是这 208 道题中，第二部分“Java 容器”模块的题和答案。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%872/1.png">
+<meta property="og:image" content="http://example.com/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%872/2.png">
+<meta property="article:published_time" content="2021-07-24T03:56:00.000Z">
+<meta property="article:modified_time" content="2021-07-24T07:03:46.162Z">
+<meta property="article:author" content="默屿">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%872/1.png">
+
+<link rel="canonical" href="http://example.com/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%872/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>java面试准备2 | 七秒记忆</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">七秒记忆</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-read">
+
+    <a href="/categories/%E8%AF%BB%E4%B9%A6" rel="section"><i class="fa fa-book fa-fw"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%872/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/miyan.jpg">
+      <meta itemprop="name" content="默屿">
+      <meta itemprop="description" content="不积跬步无以至千里">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="七秒记忆">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java面试准备2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-07-24 11:56:00 / 修改时间：15:03:46" itemprop="dateCreated datePublished" datetime="2021-07-24T11:56:00+08:00">2021-07-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本篇是这 208 道题中，第二部分“Java 容器”模块的题和答案。</p>
+<span id="more"></span>
+
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><h4 id="java-容器都有哪些？"><a href="#java-容器都有哪些？" class="headerlink" title="java 容器都有哪些？"></a>java 容器都有哪些？</h4><p>常用容器的图录：</p>
+<p><img src="/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%872/1.png"></p>
+<h4 id="Collection-和-Collections-有什么区别？"><a href="#Collection-和-Collections-有什么区别？" class="headerlink" title="Collection 和 Collections 有什么区别？"></a>Collection 和 Collections 有什么区别？</h4><ul>
+<li>java.util.Collection 是一个集合接口（集合类的一个顶级接口）。它提供了对集合对象进行基本操作的通用接口方法。Collection接口在Java 类库中有很多具体的实现。Collection接口的意义是为各种具体的集合提供了最大化的统一操作方式，其直接继承接口有List与Set。</li>
+<li>Collections则是集合类的一个工具类/帮助类，其中提供了一系列静态方法，用于对集合中元素进行排序、搜索以及线程安全等各种操作。</li>
+</ul>
+<h4 id="List、Set、Map-之间的区别是什么？"><a href="#List、Set、Map-之间的区别是什么？" class="headerlink" title="List、Set、Map 之间的区别是什么？"></a>List、Set、Map 之间的区别是什么？</h4><p><img src="/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%872/2.png"></p>
+<h4 id="HashMap-和-Hashtable-有什么区别？"><a href="#HashMap-和-Hashtable-有什么区别？" class="headerlink" title="HashMap 和 Hashtable 有什么区别？"></a>HashMap 和 Hashtable 有什么区别？</h4><ul>
+<li>hashMap去掉了HashTable 的contains方法，但是加上了containsValue（）和containsKey（）方法。</li>
+<li>hashTable同步的，而HashMap是非同步的，效率上逼hashTable要高。</li>
+<li>hashMap允许空键值，而hashTable不允许。</li>
+</ul>
+<h4 id="如何决定使用-HashMap-还是-TreeMap？"><a href="#如何决定使用-HashMap-还是-TreeMap？" class="headerlink" title="如何决定使用 HashMap 还是 TreeMap？"></a>如何决定使用 HashMap 还是 TreeMap？</h4><p>对于在Map中插入、删除和定位元素这类操作，HashMap是最好的选择。然而，假如你需要对一个有序的key集合进行遍历，TreeMap是更好的选择。基于你的collection的大小，也许向HashMap中添加元素会更快，将map换为TreeMap进行有序key的遍历。</p>
+<h4 id="说一下-HashMap-的实现原理？"><a href="#说一下-HashMap-的实现原理？" class="headerlink" title="说一下 HashMap 的实现原理？"></a>说一下 HashMap 的实现原理？</h4><p>HashMap概述：HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。 </p>
+<p>HashMap的数据结构：在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，HashMap也不例外。HashMap实际上是一个“链表散列”的数据结构，即数组和链表的结合体。</p>
+<p>当我们往Hashmap中put元素时,首先根据key的hashcode重新计算hash值,根绝hash值得到这个元素在数组中的位置(下标),如果该数组在该位置上已经存放了其他元素,那么在这个位置上的元素将以链表的形式存放,新加入的放在链头,最先加入的放入链尾.如果数组中该位置没有元素,就直接将该元素放到数组的该位置上。</p>
+<p>需要注意Jdk 1.8中对HashMap的实现做了优化,当链表中的节点数据超过八个之后,该链表会转为红黑树来提高查询效率,从原来的O(n)到O(logn)</p>
+<h4 id="说一下-HashSet-的实现原理？"><a href="#说一下-HashSet-的实现原理？" class="headerlink" title="说一下 HashSet 的实现原理？"></a>说一下 HashSet 的实现原理？</h4><ul>
+<li>HashSet底层由HashMap实现</li>
+<li>HashSet的值存放于HashMap的key上</li>
+<li>HashMap的value统一为PRESENT</li>
+</ul>
+<h4 id="ArrayList-和-LinkedList-的区别是什么？"><a href="#ArrayList-和-LinkedList-的区别是什么？" class="headerlink" title="ArrayList 和 LinkedList 的区别是什么？"></a>ArrayList 和 LinkedList 的区别是什么？</h4><p>最明显的区别是 ArrrayList底层的数据结构是数组，支持随机访问，而 LinkedList 的底层数据结构是双向循环链表，不支持随机访问。使用下标访问一个元素，ArrayList 的时间复杂度是 O(1)，而 LinkedList 是 O(n)。</p>
+<h4 id="如何实现数组和-List-之间的转换？"><a href="#如何实现数组和-List-之间的转换？" class="headerlink" title="如何实现数组和 List 之间的转换？"></a>如何实现数组和 List 之间的转换？</h4><ul>
+<li>List转换成为数组：调用ArrayList的toArray方法。</li>
+<li>数组转换成为List：调用Arrays的asList方法。</li>
+</ul>
+<h4 id="ArrayList-和-Vector-的区别是什么？"><a href="#ArrayList-和-Vector-的区别是什么？" class="headerlink" title="ArrayList 和 Vector 的区别是什么？"></a>ArrayList 和 Vector 的区别是什么？</h4><ul>
+<li>Vector是同步的，而ArrayList不是。然而，如果你寻求在迭代的时候对列表进行改变，你应该使用CopyOnWriteArrayList。 </li>
+<li>ArrayList比Vector快，它因为有同步，不会过载。 </li>
+<li>ArrayList更加通用，因为我们可以使用Collections工具类轻易地获取同步列表和只读列表。</li>
+</ul>
+<h4 id="Array-和-ArrayList-有何区别？"><a href="#Array-和-ArrayList-有何区别？" class="headerlink" title="Array 和 ArrayList 有何区别？"></a>Array 和 ArrayList 有何区别？</h4><ul>
+<li>Array可以容纳基本类型和对象，而ArrayList只能容纳对象。 </li>
+<li>Array是指定大小的，而ArrayList大小是固定的。 </li>
+<li>Array没有提供ArrayList那么多功能，比如addAll、removeAll和iterator等。</li>
+</ul>
+<h4 id="在-Queue-中-poll-和-remove-有什么区别？"><a href="#在-Queue-中-poll-和-remove-有什么区别？" class="headerlink" title="在 Queue 中 poll()和 remove()有什么区别？"></a>在 Queue 中 poll()和 remove()有什么区别？</h4><p>poll() 和 remove() 都是从队列中取出一个元素，但是 poll() 在获取元素失败的时候会返回空，但是 remove() 失败的时候会抛出异常。</p>
+<h4 id="哪些集合类是线程安全的？"><a href="#哪些集合类是线程安全的？" class="headerlink" title="哪些集合类是线程安全的？"></a>哪些集合类是线程安全的？</h4><ul>
+<li>vector：就比arraylist多了个同步化机制（线程安全），因为效率较低，现在已经不太建议使用。在web应用中，特别是前台页面，往往效率（页面响应速度）是优先考虑的。</li>
+<li>statck：堆栈类，先进后出。</li>
+<li>hashtable：就比hashmap多了个线程安全。</li>
+<li>enumeration：枚举，相当于迭代器。</li>
+</ul>
+<h4 id="迭代器-Iterator-是什么？"><a href="#迭代器-Iterator-是什么？" class="headerlink" title="迭代器 Iterator 是什么？"></a>迭代器 Iterator 是什么？</h4><p>迭代器是一种设计模式，它是一个对象，它可以遍历并选择序列中的对象，而开发人员不需要了解该序列的底层结构。迭代器通常被称为“轻量级”对象，因为创建它的代价小。</p>
+<h4 id="Iterator-怎么使用？有什么特点？"><a href="#Iterator-怎么使用？有什么特点？" class="headerlink" title="Iterator 怎么使用？有什么特点？"></a>Iterator 怎么使用？有什么特点？</h4><p>Java中的Iterator功能比较简单，并且只能单向移动：</p>
+<p>(1) 使用方法iterator()要求容器返回一个Iterator。第一次调用Iterator的next()方法时，它返回序列的第一个元素。注意：iterator()方法是java.lang.Iterable接口,被Collection继承。</p>
+<p>(2) 使用next()获得序列中的下一个元素。</p>
+<p>(3) 使用hasNext()检查序列中是否还有元素。</p>
+<p>(4) 使用remove()将迭代器新返回的元素删除。</p>
+<p>Iterator是Java迭代器最简单的实现，为List设计的ListIterator具有更多的功能，它可以从两个方向遍历List，也可以从List中插入和删除元素。</p>
+<h4 id="Iterator-和-ListIterator-有什么区别？"><a href="#Iterator-和-ListIterator-有什么区别？" class="headerlink" title="Iterator 和 ListIterator 有什么区别？"></a>Iterator 和 ListIterator 有什么区别？</h4><ul>
+<li>Iterator可用来遍历Set和List集合，但是ListIterator只能用来遍历List。 </li>
+<li>Iterator对集合只能是前向遍历，ListIterator既可以前向也可以后向。 </li>
+<li>ListIterator实现了Iterator接口，并包含其他的功能，比如：增加元素，替换元素，获取前一个和后一个元素的索引，等等。</li>
+</ul>
+<h5 align = "center">（完）</h5>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/22/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%871/" rel="prev" title="java面试准备1">
+      <i class="fa fa-chevron-left"></i> java面试准备1
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/24/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%873/" rel="next" title="java面试准备3">
+      java面试准备3 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-%E5%AE%B9%E5%99%A8%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">java 容器都有哪些？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Collection-%E5%92%8C-Collections-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">Collection 和 Collections 有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List%E3%80%81Set%E3%80%81Map-%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">List、Set、Map 之间的区别是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap-%E5%92%8C-Hashtable-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">HashMap 和 Hashtable 有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%86%B3%E5%AE%9A%E4%BD%BF%E7%94%A8-HashMap-%E8%BF%98%E6%98%AF-TreeMap%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">如何决定使用 HashMap 还是 TreeMap？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8B-HashMap-%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="nav-number">1.6.</span> <span class="nav-text">说一下 HashMap 的实现原理？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8B-HashSet-%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="nav-number">1.7.</span> <span class="nav-text">说一下 HashSet 的实现原理？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList-%E5%92%8C-LinkedList-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.8.</span> <span class="nav-text">ArrayList 和 LinkedList 的区别是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E7%BB%84%E5%92%8C-List-%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2%EF%BC%9F"><span class="nav-number">1.9.</span> <span class="nav-text">如何实现数组和 List 之间的转换？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList-%E5%92%8C-Vector-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.10.</span> <span class="nav-text">ArrayList 和 Vector 的区别是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Array-%E5%92%8C-ArrayList-%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.11.</span> <span class="nav-text">Array 和 ArrayList 有何区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8-Queue-%E4%B8%AD-poll-%E5%92%8C-remove-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.12.</span> <span class="nav-text">在 Queue 中 poll()和 remove()有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%93%AA%E4%BA%9B%E9%9B%86%E5%90%88%E7%B1%BB%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%EF%BC%9F"><span class="nav-number">1.13.</span> <span class="nav-text">哪些集合类是线程安全的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8-Iterator-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.14.</span> <span class="nav-text">迭代器 Iterator 是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Iterator-%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F"><span class="nav-number">1.15.</span> <span class="nav-text">Iterator 怎么使用？有什么特点？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Iterator-%E5%92%8C-ListIterator-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.16.</span> <span class="nav-text">Iterator 和 ListIterator 有什么区别？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.16.1.</span> <span class="nav-text">（完）</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="默屿"
+      src="/uploads/miyan.jpg">
+  <p class="site-author-name" itemprop="name">默屿</p>
+  <div class="site-description" itemprop="description">不积跬步无以至千里</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">默屿</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
