@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本篇是第十五部分“Redis”模块的题和答案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java面试准备15">
+<meta property="og:url" content="http://example.com/2021/07/25/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%8715/index.html">
+<meta property="og:site_name" content="七秒记忆">
+<meta property="og:description" content="本篇是第十五部分“Redis”模块的题和答案。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-25T03:56:00.000Z">
+<meta property="article:modified_time" content="2021-07-25T04:15:31.306Z">
+<meta property="article:author" content="默屿">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/07/25/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%8715/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>java面试准备15 | 七秒记忆</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">七秒记忆</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-read">
+
+    <a href="/categories/%E8%AF%BB%E4%B9%A6" rel="section"><i class="fa fa-book fa-fw"></i>阅读</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/25/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%8715/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/miyan.jpg">
+      <meta itemprop="name" content="默屿">
+      <meta itemprop="description" content="不积跬步无以至千里">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="七秒记忆">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java面试准备15
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-07-25 11:56:00 / 修改时间：12:15:31" itemprop="dateCreated datePublished" datetime="2021-07-25T11:56:00+08:00">2021-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本篇是第十五部分“Redis”模块的题和答案。</p>
+<span id="more"></span>
+
+<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><h4 id="redis-是什么？都有哪些使用场景？"><a href="#redis-是什么？都有哪些使用场景？" class="headerlink" title="redis 是什么？都有哪些使用场景？"></a>redis 是什么？都有哪些使用场景？</h4><p>Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。</p>
+<p>Redis 使用场景：</p>
+<ul>
+<li>数据高并发的读写</li>
+<li>海量数据的读写</li>
+<li>对扩展性要求高的数据</li>
+</ul>
+<h4 id="redis-有哪些功能？"><a href="#redis-有哪些功能？" class="headerlink" title="redis 有哪些功能？"></a>redis 有哪些功能？</h4><ul>
+<li>数据缓存功能</li>
+<li>分布式锁的功能</li>
+<li>支持数据持久化</li>
+<li>支持事务</li>
+<li>支持消息队列</li>
+</ul>
+<h4 id="redis-和-memecache-有什么区别？"><a href="#redis-和-memecache-有什么区别？" class="headerlink" title="redis 和 memecache 有什么区别？"></a>redis 和 memecache 有什么区别？</h4><ul>
+<li>memcached所有的值均是简单的字符串，redis作为其替代者，支持更为丰富的数据类型</li>
+<li>redis的速度比memcached快很多</li>
+<li>redis可以持久化其数据</li>
+</ul>
+<h4 id="redis-为什么是单线程的？"><a href="#redis-为什么是单线程的？" class="headerlink" title="redis 为什么是单线程的？"></a>redis 为什么是单线程的？</h4><p>因为 cpu 不是 Redis 的瓶颈，Redis 的瓶颈最有可能是机器内存或者网络带宽。既然单线程容易实现，而且 cpu 又不会成为瓶颈，那就顺理成章地采用单线程的方案了。</p>
+<p>关于 Redis 的性能，官方网站也有，普通笔记本轻松处理每秒几十万的请求。</p>
+<p>而且单线程并不代表就慢 nginx 和 nodejs 也都是高性能单线程的代表。</p>
+<h4 id="什么是缓存穿透？怎么解决？"><a href="#什么是缓存穿透？怎么解决？" class="headerlink" title="什么是缓存穿透？怎么解决？"></a>什么是缓存穿透？怎么解决？</h4><p>缓存穿透：指查询一个一定不存在的数据，由于缓存是不命中时需要从数据库查询，查不到数据则不写入缓存，这将导致这个不存在的数据每次请求都要到数据库去查询，造成缓存穿透。</p>
+<p>解决方案：最简单粗暴的方法如果一个查询返回的数据为空（不管是数据不存在，还是系统故障），我们就把这个空结果进行缓存，但它的过期时间会很短，最长不超过五分钟。</p>
+<h4 id="redis-支持的数据类型有哪些？"><a href="#redis-支持的数据类型有哪些？" class="headerlink" title="redis 支持的数据类型有哪些？"></a>redis 支持的数据类型有哪些？</h4><p>string、list、hash、set、zset。</p>
+<h4 id="redis-支持的-java-客户端都有哪些？"><a href="#redis-支持的-java-客户端都有哪些？" class="headerlink" title="redis 支持的 java 客户端都有哪些？"></a>redis 支持的 java 客户端都有哪些？</h4><p>Redisson、Jedis、lettuce等等，官方推荐使用Redisson。</p>
+<h4 id="jedis-和-redisson-有哪些区别？"><a href="#jedis-和-redisson-有哪些区别？" class="headerlink" title="jedis 和 redisson 有哪些区别？"></a>jedis 和 redisson 有哪些区别？</h4><p>Jedis是Redis的Java实现的客户端，其API提供了比较全面的Redis命令的支持。</p>
+<p>Redisson实现了分布式和可扩展的Java数据结构，和Jedis相比，功能较为简单，不支持字符串操作，不支持排序、事务、管道、分区等Redis特性。Redisson的宗旨是促进使用者对Redis的关注分离，从而让使用者能够将精力更集中地放在处理业务逻辑上。</p>
+<h4 id="怎么保证缓存和数据库数据的一致性？"><a href="#怎么保证缓存和数据库数据的一致性？" class="headerlink" title="怎么保证缓存和数据库数据的一致性？"></a>怎么保证缓存和数据库数据的一致性？</h4><p>合理设置缓存的过期时间。</p>
+<p>新增、更改、删除数据库操作时同步更新 Redis，可以使用事物机制来保证数据的一致性。</p>
+<h4 id="redis-持久化有几种方式？"><a href="#redis-持久化有几种方式？" class="headerlink" title="redis 持久化有几种方式？"></a>redis 持久化有几种方式？</h4><p>Redis 的持久化有两种方式，或者说有两种策略：</p>
+<ul>
+<li>RDB（Redis Database）：指定的时间间隔能对你的数据进行快照存储。</li>
+<li>AOF（Append Only File）：每一个收到的写命令都通过write函数追加到文件中。</li>
+</ul>
+<h4 id="redis-怎么实现分布式锁？"><a href="#redis-怎么实现分布式锁？" class="headerlink" title="redis 怎么实现分布式锁？"></a>redis 怎么实现分布式锁？</h4><p>Redis 分布式锁其实就是在系统里面占一个“坑”，其他程序也要占“坑”的时候，占用成功了就可以继续执行，失败了就只能放弃或稍后重试。</p>
+<p>占坑一般使用 setnx(set if not exists)指令，只允许被一个程序占有，使用完调用 del 释放锁。</p>
+<h4 id="redis-分布式锁有什么缺陷？"><a href="#redis-分布式锁有什么缺陷？" class="headerlink" title="redis 分布式锁有什么缺陷？"></a>redis 分布式锁有什么缺陷？</h4><p>Redis 分布式锁不能解决超时的问题，分布式锁有一个超时时间，程序的执行如果超出了锁的超时时间就会出现问题。</p>
+<h4 id="redis-如何做内存优化？"><a href="#redis-如何做内存优化？" class="headerlink" title="redis 如何做内存优化？"></a>redis 如何做内存优化？</h4><p>尽可能使用散列表（hashes），散列表（是说散列表里面存储的数少）使用的内存非常小，所以你应该尽可能的将你的数据模型抽象到一个散列表里面。</p>
+<p>比如你的web系统中有一个用户对象，不要为这个用户的名称，姓氏，邮箱，密码设置单独的key,而是应该把这个用户的所有信息存储到一张散列表里面。</p>
+<h4 id="redis-淘汰策略有哪些？"><a href="#redis-淘汰策略有哪些？" class="headerlink" title="redis 淘汰策略有哪些？"></a>redis 淘汰策略有哪些？</h4><ul>
+<li>volatile-lru：从已设置过期时间的数据集（server. db[i]. expires）中挑选最近最少使用的数据淘汰。</li>
+<li>volatile-ttl：从已设置过期时间的数据集（server. db[i]. expires）中挑选将要过期的数据淘汰。</li>
+<li>volatile-random：从已设置过期时间的数据集（server. db[i]. expires）中任意选择数据淘汰。</li>
+<li>allkeys-lru：从数据集（server. db[i]. dict）中挑选最近最少使用的数据淘汰。</li>
+<li>allkeys-random：从数据集（server. db[i]. dict）中任意选择数据淘汰。</li>
+<li>no-enviction（驱逐）：禁止驱逐数据。</li>
+</ul>
+<h4 id="redis-常见的性能问题有哪些？该如何解决？"><a href="#redis-常见的性能问题有哪些？该如何解决？" class="headerlink" title="redis 常见的性能问题有哪些？该如何解决？"></a>redis 常见的性能问题有哪些？该如何解决？</h4><p>主服务器写内存快照，会阻塞主线程的工作，当快照比较大时对性能影响是非常大的，会间断性暂停服务，所以主服务器最好不要写内存快照。</p>
+<p>Redis 主从复制的性能问题，为了主从复制的速度和连接的稳定性，主从库最好在同一个局域网内。</p>
+<h5 align = "center">（完）</h5>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/25/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%8714/" rel="prev" title="java面试准备14">
+      <i class="fa fa-chevron-left"></i> java面试准备14
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/25/java%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%8716/" rel="next" title="java面试准备16">
+      java面试准备16 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis"><span class="nav-number">1.</span> <span class="nav-text">Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">redis 是什么？都有哪些使用场景？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8A%9F%E8%83%BD%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">redis 有哪些功能？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-%E5%92%8C-memecache-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">redis 和 memecache 有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%9A%84%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">redis 为什么是单线程的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">什么是缓存穿透？怎么解决？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-%E6%94%AF%E6%8C%81%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.6.</span> <span class="nav-text">redis 支持的数据类型有哪些？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-%E6%94%AF%E6%8C%81%E7%9A%84-java-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.7.</span> <span class="nav-text">redis 支持的 java 客户端都有哪些？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jedis-%E5%92%8C-redisson-%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.8.</span> <span class="nav-text">jedis 和 redisson 有哪些区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9F"><span class="nav-number">1.9.</span> <span class="nav-text">怎么保证缓存和数据库数据的一致性？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">1.10.</span> <span class="nav-text">redis 持久化有几种方式？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%EF%BC%9F"><span class="nav-number">1.11.</span> <span class="nav-text">redis 怎么实现分布式锁？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E6%9C%89%E4%BB%80%E4%B9%88%E7%BC%BA%E9%99%B7%EF%BC%9F"><span class="nav-number">1.12.</span> <span class="nav-text">redis 分布式锁有什么缺陷？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-%E5%A6%82%E4%BD%95%E5%81%9A%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="nav-number">1.13.</span> <span class="nav-text">redis 如何做内存优化？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.14.</span> <span class="nav-text">redis 淘汰策略有哪些？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-%E5%B8%B8%E8%A7%81%E7%9A%84%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E8%AF%A5%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="nav-number">1.15.</span> <span class="nav-text">redis 常见的性能问题有哪些？该如何解决？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.15.1.</span> <span class="nav-text">（完）</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="默屿"
+      src="/uploads/miyan.jpg">
+  <p class="site-author-name" itemprop="name">默屿</p>
+  <div class="site-description" itemprop="description">不积跬步无以至千里</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">默屿</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
